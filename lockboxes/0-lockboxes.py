@@ -2,7 +2,8 @@
 """
 Write a method that determines if all the boxes can be opened.
 """
-# Define the function canUnlockAll that takes a list of boxes as input
+
+
 def canUnlockAll(boxes):
     """
     Determine if all boxes can be unlocked.
