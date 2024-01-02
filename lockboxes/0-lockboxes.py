@@ -1,5 +1,7 @@
 #!/usr/bin/python3
-
+"""
+Write a method that determines if all the boxes can be opened.
+"""
 # Define the function canUnlockAll that takes a list of boxes as input
 def canUnlockAll(boxes):
     """
