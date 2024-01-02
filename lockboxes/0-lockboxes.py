@@ -2,6 +2,16 @@
 
 # Define the function canUnlockAll that takes a list of boxes as input
 def canUnlockAll(boxes):
+    """
+    Determine if all boxes can be unlocked.
+
+    Args:
+    - boxes: A list of lists where each inner list represents
+    a box and contains keys.
+
+    Returns:
+    - True if all boxes can be unlocked, else False.
+    """
     # Check if the input list is empty or None
     if not boxes or len(boxes) == 0:
         return False
