@@ -28,5 +28,8 @@ void binary_tree_print(const binary_tree_t *tree);
 
 binary_tree_t *binary_tree_node(binary_tree_t *parent, int value);
 heap_t *heap_insert(heap_t **root, int value);
+heap_t *swap_value(heap_t *parent, heap_t *child);
+int get_size(heap_t *tree);
+heap_t *get_parent(heap_t *tree, int size, int index);
 
 #endif /* _BINARY_TREES_H_ */
