@@ -7,12 +7,17 @@
  * @grid: 3x3 grid
  *
  */
-void print_grid(int grid[3][3]) {
+void print_grid(int grid[3][3])
+{
     int i, j;
-    for (i = 0; i < 3; i++) {
-        for (j = 0; j < 3; j++) {
+
+    for (i = 0; i < 3; i++)
+    {
+        for (j = 0; j < 3; j++)
+        {
             printf("%d", grid[i][j]);
-            if (j < 2) {
+            if (j < 2)
+            {
                 printf(" ");
             }
         }
@@ -25,11 +30,16 @@ void print_grid(int grid[3][3]) {
  * @grid: 3x3 grid
  * Return: 1 if stable, 0 otherwise
  */
-int is_stable(int grid[3][3]) {
+int is_stable(int grid[3][3])
+{
     int i, j;
-    for (i = 0; i < 3; i++) {
-        for (j = 0; j < 3; j++) {
-            if (grid[i][j] > 3) {
+
+    for (i = 0; i < 3; i++)
+    {
+        for (j = 0; j < 3; j++)
+      {
+            if (grid[i][j] > 3)
+            {
                 return 0;
             }
         }
@@ -41,13 +51,17 @@ int is_stable(int grid[3][3]) {
  * topple - Perform a toppling round on a sandpile
  * @grid: 3x3 grid
  */
-void topple(int grid[3][3]) {
+void topple(int grid[3][3])
+{
     int next[3][3] = {{0}};
     int i, j;
 
-    for (i = 0; i < 3; i++) {
-        for (j = 0; j < 3; j++) {
-            if (grid[i][j] >= 4) {
+    for (i = 0; i < 3; i++)
+    {
+        for (j = 0; j < 3; j++)
+        {
+            if (grid[i][j] >= 4)
+            {
                 next[i][j] -= 4;
                 if (i > 0) next[i - 1][j]++;
                 if (i < 2) next[i + 1][j]++;
@@ -58,8 +72,10 @@ void topple(int grid[3][3]) {
         }
     }
 
-    for (i = 0; i < 3; i++) {
-        for (j = 0; j < 3; j++) {
+    for (i = 0; i < 3; i++)
+    {
+        for (j = 0; j < 3; j++)
+        {
             grid[i][j] = next[i][j];
         }
     }
@@ -70,15 +86,20 @@ void topple(int grid[3][3]) {
  * @grid1: First 3x3 grid
  * @grid2: Second 3x3 grid
  */
-void sandpiles_sum(int grid1[3][3], int grid2[3][3]) {
+void sandpiles_sum(int grid1[3][3], int grid2[3][3])
+{
     int i, j;
-    for (i = 0; i < 3; i++) {
-        for (j = 0; j < 3; j++) {
+
+    for (i = 0; i < 3; i++)
+    {
+        for (j = 0; j < 3; j++)
+        {
             grid1[i][j] += grid2[i][j];
         }
     }
 
-    while (!is_stable(grid1)) {
+    while (!is_stable(grid1))
+    {
         printf("=\n");
         print_grid(grid1);
         topple(grid1);
