@@ -8,14 +8,13 @@
  *
  */
 void print_grid(int grid[3][3]) {
-    printf("---------\n");
-    for (int i = 0; i < 3; i++) {
-        for (int j = 0; j < 3; j++) {
+    int i, j;
+    for (i = 0; i < 3; i++) {
+        for (j = 0; j < 3; j++) {
             printf("%d ", grid[i][j]);
         }
         printf("\n");
     }
-    printf("---------\n");
 }
 
 /**
@@ -74,6 +73,7 @@ void sandpiles_sum(int grid1[3][3], int grid2[3][3]) {
     }
 
     while (!is_stable(grid1)) {
+        printf("=\n");
         print_grid(grid1);
         topple(grid1);
     }
