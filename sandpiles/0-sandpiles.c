@@ -23,8 +23,9 @@ void print_grid(int grid[3][3]) {
  * Return: 1 if stable, 0 otherwise
  */
 int is_stable(int grid[3][3]) {
-    for (int i = 0; i < 3; i++) {
-        for (int j = 0; j < 3; j++) {
+    int i, j;
+    for (i = 0; i < 3; i++) {
+        for (j = 0; j < 3; j++) {
             if (grid[i][j] > 3) {
                 return 0;
             }
@@ -39,9 +40,10 @@ int is_stable(int grid[3][3]) {
  */
 void topple(int grid[3][3]) {
     int next[3][3] = {{0}};
+    int i, j;
 
-    for (int i = 0; i < 3; i++) {
-        for (int j = 0; j < 3; j++) {
+    for (i = 0; i < 3; i++) {
+        for (j = 0; j < 3; j++) {
             if (grid[i][j] >= 4) {
                 next[i][j] -= 4;
                 if (i > 0) next[i - 1][j]++;
@@ -53,8 +55,8 @@ void topple(int grid[3][3]) {
         }
     }
 
-    for (int i = 0; i < 3; i++) {
-        for (int j = 0; j < 3; j++) {
+    for (i = 0; i < 3; i++) {
+        for (j = 0; j < 3; j++) {
             grid[i][j] = next[i][j];
         }
     }
@@ -66,8 +68,9 @@ void topple(int grid[3][3]) {
  * @grid2: Second 3x3 grid
  */
 void sandpiles_sum(int grid1[3][3], int grid2[3][3]) {
-    for (int i = 0; i < 3; i++) {
-        for (int j = 0; j < 3; j++) {
+    int i, j;
+    for (i = 0; i < 3; i++) {
+        for (j = 0; j < 3; j++) {
             grid1[i][j] += grid2[i][j];
         }
     }
