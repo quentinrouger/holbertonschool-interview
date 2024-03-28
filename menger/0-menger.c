@@ -12,16 +12,18 @@
  */
 void drawCell(int x, int y, int size)
 {
-while (size) {
-	if (x % 3 == 1 && y % 3 == 1) {
+	while (size)
+	{
+		if (x % 3 == 1 && y % 3 == 1)
+		{
 			printf(" ");
 			return;
+		}
+		x /= 3;
+		y /= 3;
+		size /= 3;
 	}
-	x /= 3;
-	y /= 3;
-	size /= 3;
-}
-printf("#");
+	printf("#");
 }
 
 /**
@@ -35,16 +37,16 @@ printf("#");
  */
 void menger(int level)
 {
-		int size;
-		int x, y;
+	if (level < 0)
+		return;
 
-		if (level < 0)
-				return;
+	int size = pow(3, level);
+	int x, y;
 
-		size = pow(3, level);
-		for (y = 0; y < size; y++) {
-				for (x = 0; x < size; x++)
-						drawCell(x, y, size);
-				printf("\n");
-		}
+	for (y = 0; y < size; y++)
+	{
+		for (x = 0; x < size; x++)
+			drawCell(x, y, size);
+		printf("\n");
+	}
 }
