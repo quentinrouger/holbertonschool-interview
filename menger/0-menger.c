@@ -33,12 +33,15 @@ void drawCell(int x, int y, int size) {
  * to draw each cell of the sponge.
  */
 void menger(int level) {
+    int size;
+    int x, y;
+
     if (level < 0)
         return;
 
-    int size = pow(3, level);
-    for (int y = 0; y < size; y++) {
-        for (int x = 0; x < size; x++) {
+    size = pow(3, level);
+    for (y = 0; y < size; y++) {
+        for (x = 0; x < size; x++) {
             drawCell(x, y, size);
         }
         printf("\n");
