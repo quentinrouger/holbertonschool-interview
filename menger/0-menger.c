@@ -10,17 +10,18 @@
  * with the specified size.
  * The cell is drawn as ' ' if it is part of the empty space, or '#' otherwise.
  */
-void drawCell(int x, int y, int size) {
-    while (size) {
-        if (x % 3 == 1 && y % 3 == 1) {
-            printf(" ");
-            return;
-        }
-        x /= 3;
-        y /= 3;
-        size /= 3;
-    }
-    printf("#");
+void drawCell(int x, int y, int size)
+{
+		while (size) {
+				if (x % 3 == 1 && y % 3 == 1) {
+						printf(" ");
+						return;
+				}
+				x /= 3;
+				y /= 3;
+				size /= 3;
+		}
+		printf("#");
 }
 
 /**
@@ -32,18 +33,19 @@ void drawCell(int x, int y, int size) {
  * The function calculates the size of the sponge and calls drawCell
  * to draw each cell of the sponge.
  */
-void menger(int level) {
-    int size;
-    int x, y;
+void menger(int level)
+{
+		int size;
+		int x, y;
 
-    if (level < 0)
-        return;
+		if (level < 0)
+				return;
 
-    size = pow(3, level);
-    for (y = 0; y < size; y++) {
-        for (x = 0; x < size; x++) {
-            drawCell(x, y, size);
-        }
-        printf("\n");
-    }
+		size = pow(3, level);
+		for (y = 0; y < size; y++) {
+				for (x = 0; x < size; x++) {
+						drawCell(x, y, size);
+				}
+				printf("\n");
+		}
 }
