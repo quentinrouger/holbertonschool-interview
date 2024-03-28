@@ -37,16 +37,18 @@ void drawCell(int x, int y, int size)
  */
 void menger(int level)
 {
+	int size, x, y;
+
 	if (level < 0)
 		return;
 
-	int size = pow(3, level);
-	int x, y;
-
+	size = pow(3, level);
 	for (y = 0; y < size; y++)
 	{
 		for (x = 0; x < size; x++)
+		{
 			drawCell(x, y, size);
+		}
 		printf("\n");
 	}
 }
