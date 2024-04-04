@@ -75,7 +75,7 @@ def solve_nqueens(N):
         None
     """
     if N < 4:
-        return
+        return ("N must be at least 4")
 
     board = [[0 for _ in range(N)] for _ in range(N)]
 
