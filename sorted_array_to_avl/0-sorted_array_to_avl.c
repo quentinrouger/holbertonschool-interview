@@ -1,50 +1,91 @@
 #include "binary_trees.h"
-#include <stdlib.h>
+
 
 /**
- * sorted_array_to_avl - Builds an AVL tree from a sorted array
- * @array: Pointer to the first element of the array
- * @size: Number of elements in the array
+ * binary_tree_node - Creates a binary tree node
+ * @parent: Parent node
+ * @value: Value of node
  *
- * Return: Pointer to the root node of the AVL tree, or NULL on failure
+ * Return: Create new Binary tree
  */
-avl_t *sorted_array_to_avl(int *array, size_t size)
-{
-    if (size == 0)
-        return (NULL);
 
-    return sorted_array_to_avl_recursive(array, 0, size - 1);
+binary_tree_t *binary_tree_node(binary_tree_t *parent, int value)
+{
+	binary_tree_t *new_node = malloc(sizeof(binary_tree_t));
+
+	if (new_node == NULL)
+	{
+		return (NULL);
+	}
+
+	/*Assign data to this node*/
+	new_node->n = value;
+	new_node->parent = parent;
+	new_node->left = NULL;
+	new_node->right = NULL;
+	return (new_node);
 }
 
 /**
- * sorted_array_to_avl_recursive - Recursive helper function to build AVL tree
- * @array: Pointer to the first element of the array
- * @start: Index of the start of the subarray
- * @end: Index of the end of the subarray
- *
- * Return: Pointer to the root node of the AVL tree, or NULL on failure
- */
-avl_t *sorted_array_to_avl_recursive(int *array, int start, int end)
+* insert_sorted_array - Inserts sorted array to a Binary Tree
+* @array: Pointer to first element of sorted array
+* @min: Minimum value
+* @max: Maximum Value
+*
+* Return: Pointer to root node of AVL Tree, or Null on failure
+*/
+avl_t *insert_sorted_array(int *array, int min, int max)
 {
-    int mid;
+	int medium_value;
+	avl_t *tree;
+	binary_tree_t *parent = NULL;
 
-    if (start > end)
-        return (NULL);
+	if (min > max)
+	{
+		return (NULL);
+	}
 
-    mid = (start + end) / 2;
-    avl_t *root = malloc(sizeof(avl_t));
-    if (!root)
-        return (NULL);
+	medium_value = (min + max) / 2;
 
-    root->n = array[mid];
-    root->left = sorted_array_to_avl_recursive(array, start, mid - 1);
-    root->right = sorted_array_to_avl_recursive(array, mid + 1, end);
-    root->parent = NULL;
+	tree = binary_tree_node(parent, array[medium_value]);
 
-    if (root->left)
-        root->left->parent = root;
-    if (root->right)
-        root->right->parent = root;
+	if (tree == NULL)
+	{
+		return (NULL);
+	}
 
-    return (root);
+	tree->left = insert_sorted_array(array, min, medium_value - 1);
+	tree->right = insert_sorted_array(array, medium_value + 1, max);
+
+	if (tree->left)
+	{
+		tree->left->parent = tree;
+	}
+
+	if (tree->right)
+	{
+		tree->right->parent = tree;
+	}
+
+	return (tree);
+}
+
+/**
+* sorted_array_to_avl - Builds an AVL Tree from a sorted array
+* @array: Pointer to first element of sorted array
+* @size: Number of elements in array
+*
+* Return: Pointer to root node of AVL Tree, or Null on failure
+*/
+
+avl_t *sorted_array_to_avl(int *array, size_t size)
+{
+	avl_t *root = NULL;
+
+	if (array == NULL)
+		return (NULL);
+
+	root = insert_sorted_array(array, 0, size - 1);
+
+	return (root);
 }
