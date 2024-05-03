@@ -1,4 +1,7 @@
 #!/usr/bin/python3
+"""
+Module for calculating the amount of water retained between walls after rain.
+"""
 
 def rain(walls):
     """
