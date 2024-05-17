@@ -22,7 +22,7 @@ void print_array(int *array, size_t left, size_t right)
 }
 
 /**
- * Recursive function to perform advanced binary search
+ * advanced_binary_recursive - Rec function to perform advanced binary search
  * @array: The array to search in
  * @left: The starting index of the subarray to search
  * @right: The ending index of the subarray to search
