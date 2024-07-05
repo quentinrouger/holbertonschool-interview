@@ -5,50 +5,66 @@
 /**
  * merge - Merges two subarrays of array.
  * @array: The array to be sorted.
- * @left: The left subarray.
- * @left_size: The size of the left subarray.
- * @right: The right subarray.
- * @right_size: The size of the right subarray.
+ * @temp: The temporary array used for merging.
+ * @left: The starting index of the left subarray.
+ * @mid: The ending index of the left subarray.
+ * @right: The ending index of the right subarray.
  */
-void merge(int *array, int *left, size_t left_size, int *right, size_t right_size)
+void merge(int *array, int *temp, size_t left, size_t mid, size_t right)
 {
-    size_t i = 0, j = 0, k = 0;
+    size_t i = left, j = mid, k = left;
 
     printf("Merging...\n");
     printf("[left]: ");
-    print_array(left, left_size);
+    print_array(array + left, mid - left);
     printf("[right]: ");
-    print_array(right, right_size);
+    print_array(array + mid, right - mid);
 
-    while (i < left_size && j < right_size)
+    while (i < mid && j < right)
     {
-        if (left[i] <= right[j])
+        if (array[i] <= array[j])
         {
-            array[k] = left[i];
-            i++;
+            temp[k++] = array[i++];
         }
         else
         {
-            array[k] = right[j];
-            j++;
+            temp[k++] = array[j++];
         }
-        k++;
     }
-    while (i < left_size)
+    while (i < mid)
     {
-        array[k] = left[i];
-        i++;
-        k++;
+        temp[k++] = array[i++];
     }
-    while (j < right_size)
+    while (j < right)
     {
-        array[k] = right[j];
-        j++;
-        k++;
+        temp[k++] = array[j++];
+    }
+    for (i = left; i < right; i++)
+    {
+        array[i] = temp[i];
     }
 
     printf("[Done]: ");
-    print_array(array, left_size + right_size);
+    print_array(array + left, right - left);
+}
+
+/**
+ * merge_sort_recursive - Recursively sorts an array using merge sort algorithm.
+ * @array: The array to be sorted.
+ * @temp: The temporary array used for merging.
+ * @left: The starting index of the subarray.
+ * @right: The ending index of the subarray.
+ */
+void merge_sort_recursive(int *array, int *temp, size_t left, size_t right)
+{
+    if (right - left < 2)
+        return;
+
+    size_t mid = (left + right) / 2;
+
+    merge_sort_recursive(array, temp, left, mid);
+    merge_sort_recursive(array, temp, mid, right);
+    merge(array, temp, left, mid, right);
 }
 
 /**
@@ -58,25 +74,13 @@ void merge(int *array, int *left, size_t left_size, int *right, size_t right_siz
  */
 void merge_sort(int *array, size_t size)
 {
-    size_t mid, i;
-    int *left, *right;
-
     if (size < 2)
         return;
 
-    mid = size / 2;
-    left = malloc(mid * sizeof(int));
-    right = malloc((size - mid) * sizeof(int));
+    int *temp = malloc(size * sizeof(int));
+    if (temp == NULL)
+        return;
 
-    for (i = 0; i < mid; i++)
-        left[i] = array[i];
-    for (i = mid; i < size; i++)
-        right[i - mid] = array[i];
-
-    merge_sort(left, mid);
-    merge_sort(right, size - mid);
-    merge(array, left, mid, right, size - mid);
-
-    free(left);
-    free(right);
+    merge_sort_recursive(array, temp, 0, size);
+    free(temp);
 }
