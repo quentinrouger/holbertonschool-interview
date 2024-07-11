@@ -25,5 +25,5 @@ def makeChange(coins, total):
         for i in range(coin, total + 1):
             dp[i] = min(dp[i], dp[i - coin] + 1)
 
-    # If dp[total] is still infinity, it means it's not possible to form the total
+    # If dp[total] is still infinity, means it's not possible to form the total
     return dp[total] if dp[total] != float('inf') else -1
