@@ -11,7 +11,7 @@
  */
 int max(int a, int b)
 {
-    return (a > b ? a : b);
+	return (a > b ? a : b);
 }
 
 /**
@@ -22,9 +22,9 @@ int max(int a, int b)
  */
 int height(const binary_tree_t *tree)
 {
-    if (!tree)
-        return (0);
-    return (1 + max(height(tree->left), height(tree->right)));
+	if (!tree)
+		return (0);
+	return (1 + max(height(tree->left), height(tree->right)));
 }
 
 /**
@@ -37,12 +37,12 @@ int height(const binary_tree_t *tree)
  */
 int is_bst_helper(const binary_tree_t *tree, int min, int max)
 {
-    if (!tree)
-        return (1);
-    if (tree->n <= min || tree->n >= max)
-        return (0);
-    return (is_bst_helper(tree->left, min, tree->n) &&
-            is_bst_helper(tree->right, tree->n, max));
+	if (!tree)
+		return (1);
+	if (tree->n <= min || tree->n >= max)
+		return (0);
+	return (is_bst_helper(tree->left, min, tree->n) &&
+					is_bst_helper(tree->right, tree->n, max));
 }
 
 /**
@@ -53,15 +53,15 @@ int is_bst_helper(const binary_tree_t *tree, int min, int max)
  */
 int is_balanced(const binary_tree_t *tree)
 {
-    int lh, rh;
+	int lh, rh;
 
-    if (!tree)
-        return (1);
-    lh = height(tree->left);
-    rh = height(tree->right);
-    if (abs(lh - rh) > 1)
-        return (0);
-    return (is_balanced(tree->left) && is_balanced(tree->right));
+	if (!tree)
+		return (1);
+	lh = height(tree->left);
+	rh = height(tree->right);
+	if (abs(lh - rh) > 1)
+		return (0);
+	return (is_balanced(tree->left) && is_balanced(tree->right));
 }
 
 /**
@@ -72,7 +72,7 @@ int is_balanced(const binary_tree_t *tree)
  */
 int binary_tree_is_avl(const binary_tree_t *tree)
 {
-    if (!tree)
-        return (0);
-    return (is_bst_helper(tree, INT_MIN, INT_MAX) && is_balanced(tree));
+	if (!tree)
+		return (0);
+	return (is_bst_helper(tree, INT_MIN, INT_MAX) && is_balanced(tree));
 }
